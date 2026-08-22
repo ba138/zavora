@@ -17,7 +17,7 @@ class _HomeScreenState extends State<HomeScreen>
       "text": "New Collection\n200",
       "textOnLeft": true,
     },
-    {"image": Assets.shirts, "text": "Cloths\n200", "textOnLeft": false},
+    {"image": Assets.shirts, "text": "Shirts\n200", "textOnLeft": false},
     {"image": Assets.bags, "text": "Bags\n200", "textOnLeft": true},
     {
       "image": Assets.electronic,
