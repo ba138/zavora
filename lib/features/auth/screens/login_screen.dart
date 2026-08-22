@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:zavora/contants/app_colors.dart';
 import 'package:zavora/contants/myText.dart';
 import 'package:zavora/contants/myText_filed.dart';
@@ -122,11 +123,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(width: 5),
                   GestureDetector(
                     onTap: () {
-                      // context.goNamed('signup');
+                      context.goNamed('signin');
                     },
                     child: MyText(
                       text: "Sign Up",
-                      size: 14,
+                      size: 16,
                       weight: FontWeight.bold,
                       color: AppColors.onSecondary,
                     ),
