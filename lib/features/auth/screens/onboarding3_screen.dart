@@ -5,14 +5,14 @@ import 'package:zavora/contants/app_colors.dart';
 import 'package:zavora/contants/myText.dart';
 import 'package:zavora/generated/assets.dart';
 
-class OnBoarding1Screen extends StatefulWidget {
-  const OnBoarding1Screen({super.key});
+class OnBoarding3Screen extends StatefulWidget {
+  const OnBoarding3Screen({super.key});
 
   @override
-  State<OnBoarding1Screen> createState() => _OnBoarding1ScreenState();
+  State<OnBoarding3Screen> createState() => _OnBoarding3ScreenState();
 }
 
-class _OnBoarding1ScreenState extends State<OnBoarding1Screen> {
+class _OnBoarding3ScreenState extends State<OnBoarding3Screen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
@@ -43,7 +43,7 @@ class _OnBoarding1ScreenState extends State<OnBoarding1Screen> {
                   borderRadius: BorderRadius.circular(35),
                   child:
                       Image.asset(
-                            Assets.on1,
+                            Assets.on2,
                             width: double.infinity,
                             height: double.infinity,
                             fit: BoxFit.cover,
@@ -57,23 +57,15 @@ class _OnBoarding1ScreenState extends State<OnBoarding1Screen> {
 
               const SizedBox(height: 20),
               MyText(
-                text: "20% Discount",
+                text: "All Types Of Offers Within Your Reach",
                 color: AppColors.background,
                 size: 24,
                 weight: FontWeight.bold,
               ),
 
               // 20% Discount
-              const SizedBox(height: 8),
 
               // New Arrival Product
-              MyText(
-                text: "New Arrival Product",
-                color: AppColors.background,
-                size: 24,
-                weight: FontWeight.bold,
-              ),
-
               const SizedBox(height: 22),
 
               // Description
@@ -95,6 +87,12 @@ class _OnBoarding1ScreenState extends State<OnBoarding1Screen> {
                   // Page indicators
                   Row(
                     children: [
+                      _buildDot(),
+
+                      const SizedBox(width: 12),
+                      _buildDot(),
+
+                      const SizedBox(width: 12),
                       Container(
                         width: 45,
                         height: 8,
@@ -103,21 +101,13 @@ class _OnBoarding1ScreenState extends State<OnBoarding1Screen> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-
-                      const SizedBox(width: 12),
-
-                      _buildDot(),
-
-                      const SizedBox(width: 12),
-
-                      _buildDot(),
                     ],
                   ),
 
                   // Next button
                   GestureDetector(
                     onTap: () {
-                      context.goNamed('onboarding2');
+                      context.goNamed('login');
                     },
                     child: Container(
                       width: 72,

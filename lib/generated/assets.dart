@@ -2,4 +2,7 @@ class Assets {
   Assets._();
 
   static const String logo = 'assets/images/splashimage.jpeg';
+  static const String on1 = 'assets/images/on1.jpeg';
+  static const String on2 = 'assets/images/on2.jpeg';
+  static const String on3 = 'assets/images/on3.jpeg';
 }

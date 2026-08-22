@@ -1,5 +1,8 @@
 import 'package:go_router/go_router.dart';
+import 'package:zavora/features/auth/screens/login_screen.dart';
 import 'package:zavora/features/auth/screens/onboarding1_screen.dart';
+import 'package:zavora/features/auth/screens/onboarding2_screen.dart';
+import 'package:zavora/features/auth/screens/onboarding3_screen.dart';
 import 'package:zavora/features/auth/screens/splash_screen.dart';
 
 final GoRouter appRouter = GoRouter(
@@ -18,6 +21,27 @@ final GoRouter appRouter = GoRouter(
       name: 'onboarding1',
       builder: (context, state) {
         return const OnBoarding1Screen();
+      },
+    ),
+    GoRoute(
+      path: '/onboarding2',
+      name: 'onboarding2',
+      builder: (context, state) {
+        return const OnBoarding2Screen();
+      },
+    ),
+    GoRoute(
+      path: '/onboarding3',
+      name: 'onboarding3',
+      builder: (context, state) {
+        return const OnBoarding3Screen();
+      },
+    ),
+    GoRoute(
+      path: '/login',
+      name: 'login',
+      builder: (context, state) {
+        return const LoginScreen();
       },
     ),
   ],
