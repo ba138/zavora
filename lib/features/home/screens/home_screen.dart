@@ -17,17 +17,14 @@ class _HomeScreenState extends State<HomeScreen>
       "text": "New Collection\n200",
       "textOnLeft": true,
     },
-    {
-      "image": Assets.shirts,
-      "text": "New Collection\n200",
-      "textOnLeft": false,
-    },
-    {"image": Assets.bags, "text": "New Collection\n200", "textOnLeft": true},
+    {"image": Assets.shirts, "text": "Cloths\n200", "textOnLeft": false},
+    {"image": Assets.bags, "text": "Bags\n200", "textOnLeft": true},
     {
       "image": Assets.electronic,
-      "text": "New Collection\n200",
+      "text": "Electronics\n200",
       "textOnLeft": false,
     },
+    {"image": Assets.shoes, "text": "Shoes\n200", "textOnLeft": false},
   ];
 
   late AnimationController _controller;
