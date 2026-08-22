@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:zavora/contants/app_colors.dart';
 import 'package:zavora/generated/assets.dart';
 
@@ -12,6 +15,17 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+
+    Timer(const Duration(seconds: 3), () {
+      if (mounted) {
+        context.goNamed('onboarding1');
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
