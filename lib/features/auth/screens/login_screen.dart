@@ -89,9 +89,20 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ],
               ),
+              const SizedBox(height: 20),
               PlatformButton(
                 text: "Google",
                 imagePath: Assets.google,
+                onTap: () {},
+                backgroundColor: AppColors.onSecondary,
+                borderColor: AppColors.onSecondary,
+                textColor: AppColors.primary,
+              ),
+              const SizedBox(height: 10),
+
+              PlatformButton(
+                text: "Apple",
+                imagePath: Assets.apple,
                 onTap: () {},
                 backgroundColor: AppColors.onSecondary,
                 borderColor: AppColors.onSecondary,
