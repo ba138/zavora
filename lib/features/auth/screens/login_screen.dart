@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zavora/contants/app_colors.dart';
 import 'package:zavora/contants/myText.dart';
+import 'package:zavora/contants/myText_filed.dart';
 
 class LoginScreen extends StatefulWidget {
   const new({super.key});
@@ -41,6 +42,26 @@ class _LoginScreenState extends State<LoginScreen> {
                 size: 16,
                 weight: FontWeight.w400,
                 lineHeight: 1.45,
+              ),
+              const SizedBox(height: 20),
+
+              MyTextField(
+                label: "Email",
+                hint: "Enter your email",
+                prefix: const Icon(
+                  Icons.email_outlined,
+                  color: AppColors.primary,
+                ),
+              ),
+              MyTextField(
+                label: "Password",
+
+                hint: "Enter your password",
+                prefix: const Icon(
+                  Icons.lock_outlined,
+                  color: AppColors.primary,
+                ),
+                isObSecure: true,
               ),
             ],
           ),
