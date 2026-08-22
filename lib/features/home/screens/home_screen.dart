@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:zavora/features/home/widgets/home_card.dart';
+import 'package:zavora/features/home/widgets/catogery_card.dart';
 import 'package:zavora/generated/assets.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -91,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen>
                       position: _slideAnimation(index),
                       child: Padding(
                         padding: const EdgeInsets.only(bottom: 16),
-                        child: HomeCard(
+                        child: CatogeryCard(
                           image: product["image"] as String,
                           text: product["text"] as String,
                           textOnLeft: product["textOnLeft"] as bool,

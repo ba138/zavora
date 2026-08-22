@@ -1,0 +1,101 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:zavora/features/home/providers/home_provider.dart';
+import 'package:zavora/features/home/widgets/home_card.dart';
+
+class ProductScreen extends ConsumerStatefulWidget {
+  const ProductScreen({super.key});
+
+  @override
+  ConsumerState<ProductScreen> createState() => _ProductScreenState();
+}
+
+class _ProductScreenState extends ConsumerState<ProductScreen>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 2500),
+    );
+
+    _controller.forward();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  Animation<double> _fadeAnimation(int index) {
+    final start = (index * 0.08).clamp(0.0, 0.7);
+    final end = (start + 0.3).clamp(0.0, 1.0);
+
+    return CurvedAnimation(
+      parent: _controller,
+      curve: Interval(start, end, curve: Curves.easeOut),
+    );
+  }
+
+  Animation<Offset> _slideAnimation(int index) {
+    final start = (index * 0.08).clamp(0.0, 0.7);
+    final end = (start + 0.3).clamp(0.0, 1.0);
+
+    return Tween<Offset>(
+      begin: const Offset(0, 0.12),
+      end: Offset.zero,
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Interval(start, end, curve: Curves.easeOutCubic),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final products = ref.watch(homeProductsProvider);
+
+    return Scaffold(
+      backgroundColor: const Color(0xFFF7F7F5),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
+          child: GridView.builder(
+            itemCount: products.length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisExtent: 276,
+              crossAxisSpacing: 14,
+              mainAxisSpacing: 18,
+            ),
+            itemBuilder: (context, index) {
+              final product = products[index];
+
+              return FadeTransition(
+                opacity: _fadeAnimation(index),
+                child: SlideTransition(
+                  position: _slideAnimation(index),
+                  child: HomeCard(
+                    imagePath: product.image,
+                    title: product.title,
+                    subtitle: product.subtitle,
+                    price: product.price,
+                    initialFavorite: product.isFavorite,
+                    width: 156,
+                    imageHeight: 170,
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ),
+    );
+  }
+}
