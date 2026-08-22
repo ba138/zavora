@@ -68,7 +68,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 isObSecure: true,
               ),
               const SizedBox(height: 40),
-              MyButton(onTap: () {}, buttonText: "Login", radius: 12),
+              MyButton(
+                onTap: () {
+                  context.goNamed('navbar');
+                },
+                buttonText: "Login",
+                radius: 12,
+              ),
               const SizedBox(height: 20),
 
               Row(
