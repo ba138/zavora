@@ -136,7 +136,7 @@ class _MyTextFieldState extends State<MyTextField> {
                           autocorrect: false,
                           enableSuggestions: false,
                           keyboardType: widget.keyboardType,
-                          cursorColor: AppColors.buttonColor,
+                          cursorColor: AppColors.onSurface,
                           maxLines: widget.maxLines,
                           readOnly: widget.isReadOnly ?? false,
                           controller: widget.controller,

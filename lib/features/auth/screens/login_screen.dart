@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:zavora/contants/app_colors.dart';
 import 'package:zavora/contants/myText.dart';
 import 'package:zavora/contants/myText_filed.dart';
+import 'package:zavora/contants/my_button.dart';
+import 'package:zavora/features/auth/widgets/platfrom_button.dart';
+import 'package:zavora/generated/assets.dart';
 
 class LoginScreen extends StatefulWidget {
   const new({super.key});
@@ -43,7 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 weight: FontWeight.w400,
                 lineHeight: 1.45,
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 60),
 
               MyTextField(
                 label: "Email",
@@ -62,6 +65,37 @@ class _LoginScreenState extends State<LoginScreen> {
                   color: AppColors.primary,
                 ),
                 isObSecure: true,
+              ),
+              const SizedBox(height: 40),
+              MyButton(onTap: () {}, buttonText: "Login", radius: 12),
+              const SizedBox(height: 20),
+
+              Row(
+                children: [
+                  Expanded(
+                    child: Divider(color: AppColors.onSecondary, thickness: 1),
+                  ),
+                  const SizedBox(width: 12),
+                  MyText(
+                    text: "OR",
+                    size: 14,
+                    weight: FontWeight.bold,
+                    color: AppColors.onSecondary,
+                  ),
+                  const SizedBox(width: 12),
+
+                  Expanded(
+                    child: Divider(color: AppColors.onSecondary, thickness: 1),
+                  ),
+                ],
+              ),
+              PlatformButton(
+                text: "Google",
+                imagePath: Assets.google,
+                onTap: () {},
+                backgroundColor: AppColors.onSecondary,
+                borderColor: AppColors.onSecondary,
+                textColor: AppColors.primary,
               ),
             ],
           ),
