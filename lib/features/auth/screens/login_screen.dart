@@ -108,6 +108,31 @@ class _LoginScreenState extends State<LoginScreen> {
                 borderColor: AppColors.onSecondary,
                 textColor: AppColors.primary,
               ),
+              const SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  MyText(
+                    text: "Don't have an account?",
+                    size: 16,
+                    weight: FontWeight.w400,
+
+                    color: const Color(0xFF777777),
+                  ),
+                  const SizedBox(width: 5),
+                  GestureDetector(
+                    onTap: () {
+                      // context.goNamed('signup');
+                    },
+                    child: MyText(
+                      text: "Sign Up",
+                      size: 14,
+                      weight: FontWeight.bold,
+                      color: AppColors.onSecondary,
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
