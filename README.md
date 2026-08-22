@@ -1,17 +1,104 @@
-# zavora
+# 🛍️ Flutter E-Commerce App
 
-A new Flutter project.
+A modern and scalable **E-Commerce mobile application** built with **Flutter and Dart**. The application provides a complete shopping experience with user authentication, product browsing, product details, cart management, wishlist, and user profile features.
 
-## Getting Started
+The project uses **Firebase** as the backend and **Riverpod** for state management, with **GoRouter** for navigation and route management.
 
-This project is a starting point for a Flutter application.
+---
 
-A few resources to get you started if this is your first Flutter project:
+## ✨ Features
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+- 🔐 User Authentication
+- 📝 User Registration
+- 🔑 User Login
+- 🚪 Logout
+- 🏠 Home Screen
+- 🛍️ Product Listing
+- 🔎 Product Search
+- 📦 Product Details
+- ❤️ Wishlist / Favorites
+- 🛒 Shopping Cart
+- 💳 Checkout Flow
+- 👤 User Profile
+- 📍 Address Management
+- 🔥 Firebase Backend
+- ⚡ Riverpod State Management
+- 🧭 GoRouter Navigation
+- 📱 Responsive UI
+- 🎨 Modern and Clean UI
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+
+- **Flutter** – Cross-platform mobile application framework
+- **Dart** – Programming language
+- **Riverpod** – State management
+- **GoRouter** – Navigation and routing
+- **Material Design** – UI components and design system
+
+### Backend
+
+- **Firebase Authentication** – User authentication
+- **Cloud Firestore** – Database
+- **Firebase Storage** – File and image storage
+
+---
+
+## 🔥 Firebase
+
+Firebase is used as the backend infrastructure for the application.
+
+### Firebase Authentication
+
+Used for:
+
+- User registration
+- User login
+- User logout
+- Authentication state
+- User account management
+
+### Cloud Firestore
+
+Used to store and manage application data such as:
+
+- Users
+- Products
+- Cart items
+- Wishlist items
+- Orders
+- Addresses
+
+### Firebase Storage
+
+Used for storing:
+
+- Product images
+- User profile images
+- Application media
+
+---
+
+## 🧠 State Management
+
+The application uses **Riverpod** for efficient and scalable state management.
+
+Riverpod is used to manage:
+
+- Authentication state
+- Product data
+- Cart state
+- Wishlist state
+- User information
+- Loading states
+- Error states
+
+Example:
+
+```dart
+final productProvider = Provider<ProductRepository>((ref) {
+  return ProductRepository();
+});
