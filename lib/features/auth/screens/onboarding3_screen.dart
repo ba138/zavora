@@ -43,7 +43,7 @@ class _OnBoarding3ScreenState extends State<OnBoarding3Screen> {
                   borderRadius: BorderRadius.circular(35),
                   child:
                       Image.asset(
-                            Assets.on2,
+                            Assets.on3,
                             width: double.infinity,
                             height: double.infinity,
                             fit: BoxFit.cover,
