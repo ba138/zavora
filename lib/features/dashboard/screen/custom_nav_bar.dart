@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zavora/contants/app_colors.dart';
+import 'package:zavora/features/home/screens/home_screen.dart';
 import 'package:zavora/features/notification/screens/notification_screen.dart';
 import 'package:zavora/features/profile/screens/profile_screen.dart';
 import 'package:zavora/features/shop/screens/shop_screen.dart';
@@ -22,7 +23,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
   ];
 
   late final List<Widget> _screens = [
-    const _HomeScreen(),
+    const HomeScreen(),
     const ShopScreen(),
     const NotificationScreen(),
     const ProfileScreen(),
@@ -110,20 +111,6 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
             }),
           ),
         ),
-      ),
-    );
-  }
-}
-
-class _HomeScreen extends StatelessWidget {
-  const _HomeScreen();
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text(
-        'Home',
-        style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
       ),
     );
   }

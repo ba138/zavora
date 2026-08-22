@@ -7,4 +7,8 @@ class Assets {
   static const String on3 = 'assets/images/on3.jpeg';
   static const String apple = 'assets/images/apple.png';
   static const String google = 'assets/images/google.png';
+  static const String shirts = 'assets/images/shirts.jpeg';
+  static const String newArrivals = 'assets/images/new.jpeg';
+  static const String bags = 'assets/images/bags.jpeg';
+  static const String electronic = 'assets/images/electronic.jpeg';
 }
