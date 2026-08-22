@@ -17,7 +17,9 @@ class MyText extends StatelessWidget {
   final Color? color;
   final FontStyle? fontStyle;
   final VoidCallback? onTap;
-  final Color decorationColor; // Add this
+  final Color decorationColor;
+  final bool fadeOut;
+  final Duration fadeOutDuration;
 
   final int? maxLines;
   final double? size;
@@ -41,8 +43,9 @@ class MyText extends StatelessWidget {
     this.textAlign,
     this.textOverflow,
     this.fontFamily,
-    this.decorationColor = Colors.transparent, // Default to transparent
-
+    this.decorationColor = Colors.transparent,
+    this.fadeOut = false,
+    this.fadeOutDuration = const Duration(milliseconds: 500),
     this.paddingTop = 0,
     this.paddingRight = 0,
     this.paddingLeft = 0,
@@ -53,37 +56,49 @@ class MyText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Animate(
-      effects: [FadeEffect(duration: Duration(milliseconds: 500))],
-      child: Padding(
-        padding: EdgeInsets.only(
-          top: paddingTop!,
-          left: paddingLeft!,
-          right: paddingRight!,
-          bottom: paddingBottom!,
-        ),
-        child: GestureDetector(
-          onTap: onTap,
-          child: Text(
-            "$text",
-            style: TextStyle(
-              fontSize: size,
-              color: color ?? AppColors.primary,
-              fontWeight: weight,
-              decoration: decoration,
-              decorationColor: decorationColor, // Apply the color here
-
-              fontFamily: fontFamily ?? AppFonts.satoshi,
-              height: lineHeight ?? 0,
-              fontStyle: fontStyle,
-              letterSpacing: letterSpacing,
-            ),
-            textAlign: textAlign,
-            maxLines: maxLines,
-            overflow: textOverflow,
+    final textWidget = Padding(
+      padding: EdgeInsets.only(
+        top: paddingTop!,
+        left: paddingLeft!,
+        right: paddingRight!,
+        bottom: paddingBottom!,
+      ),
+      child: GestureDetector(
+        onTap: onTap,
+        child: Text(
+          "$text",
+          style: TextStyle(
+            fontSize: size,
+            color: color ?? AppColors.primary,
+            fontWeight: weight,
+            decoration: decoration,
+            decorationColor: decorationColor,
+            fontFamily: fontFamily ?? AppFonts.satoshi,
+            height: lineHeight ?? 0,
+            fontStyle: fontStyle,
+            letterSpacing: letterSpacing,
           ),
+          textAlign: textAlign,
+          maxLines: maxLines,
+          overflow: textOverflow,
         ),
       ),
+    );
+
+    if (!fadeOut) {
+      return textWidget;
+    }
+
+    return Animate(
+      effects: [
+        FadeEffect(
+          begin: 1,
+          end: 0,
+          duration: fadeOutDuration,
+          curve: Curves.easeOut,
+        ),
+      ],
+      child: textWidget,
     );
   }
 }
