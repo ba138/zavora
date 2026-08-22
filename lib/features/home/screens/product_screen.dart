@@ -5,8 +5,9 @@ import 'package:zavora/model/productItem_model.dart';
 
 class ProductScreen extends ConsumerStatefulWidget {
   final List<ProductItem> products;
+  final String title;
 
-  const ProductScreen({super.key, required this.products});
+  const ProductScreen({super.key, required this.products, required this.title});
 
   @override
   ConsumerState<ProductScreen> createState() => _ProductScreenState();
@@ -65,6 +66,18 @@ class _ProductScreenState extends ConsumerState<ProductScreen>
 
     return Scaffold(
       backgroundColor: const Color(0xFFF7F7F5),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        title: Text(
+          widget.title.isNotEmpty ? widget.title : 'Items',
+          style: const TextStyle(color: Colors.black),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: GridView.builder(

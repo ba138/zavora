@@ -75,29 +75,28 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
 
   List<ProductItem> _getProductsForCategory(String categoryText) {
     final allProducts = ref.read(homeProductsProvider);
+    final shoesProducts = ref.read(homeShoesProvider);
+    final bagProducts = ref.read(homeBagsProvider);
+    final electronicsProducts = ref.read(homeElectronicsProvider);
 
     switch (categoryText) {
       case 'New Collection\n200':
-        return allProducts.take(3).toList();
-      case 'Shirts\n200':
-        return allProducts
-            .where((product) => product.title.toLowerCase().contains('shirt'))
-            .toList();
-      case 'Bags\n200':
-        return allProducts
-            .where((product) => product.title.toLowerCase().contains('dress'))
-            .toList();
-      case 'Electronics\n200':
-      case 'Shoes\n200':
-      default:
         return allProducts;
+      case 'Shirts\n200':
+        return allProducts;
+      case 'Bags\n200':
+        return bagProducts;
+      case 'Electronics\n200':
+        return electronicsProducts;
+      case 'Shoes\n200':
+        return shoesProducts;
+      default:
+        return const [];
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final productList = ref.read(homeProductsProvider);
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -126,7 +125,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                             final selectedList = _getProductsForCategory(
                               product["text"] as String,
                             );
-                            context.push('/product', extra: selectedList);
+                            final title = (product["text"] as String)
+                                .split('\n')
+                                .first
+                                .trim();
+
+                            context.push(
+                              '/product?title=${Uri.encodeComponent(title)}',
+                              extra: selectedList,
+                            );
                           },
                         ),
                       ),

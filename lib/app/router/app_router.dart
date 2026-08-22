@@ -67,7 +67,8 @@ final GoRouter appRouter = GoRouter(
       name: 'product',
       builder: (context, state) {
         final products = state.extra as List<ProductItem>? ?? const [];
-        return ProductScreen(products: products);
+        final title = state.uri.queryParameters['title'] ?? '';
+        return ProductScreen(products: products, title: title);
       },
     ),
   ],
