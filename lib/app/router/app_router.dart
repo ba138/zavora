@@ -6,6 +6,8 @@ import 'package:zavora/features/auth/screens/onboarding3_screen.dart';
 import 'package:zavora/features/auth/screens/signin_screen.dart';
 import 'package:zavora/features/auth/screens/splash_screen.dart';
 import 'package:zavora/features/dashboard/screen/custom_nav_bar.dart';
+import 'package:zavora/features/home/screens/product_screen.dart';
+import 'package:zavora/model/productItem_model.dart';
 
 final GoRouter appRouter = GoRouter(
   initialLocation: '/splash',
@@ -58,6 +60,14 @@ final GoRouter appRouter = GoRouter(
       name: 'navbar',
       builder: (context, state) {
         return const CustomBottomNavBar();
+      },
+    ),
+    GoRoute(
+      path: '/product',
+      name: 'product',
+      builder: (context, state) {
+        final products = state.extra as List<ProductItem>? ?? const [];
+        return ProductScreen(products: products);
       },
     ),
   ],

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:zavora/features/home/providers/home_provider.dart';
 import 'package:zavora/features/home/widgets/home_card.dart';
+import 'package:zavora/model/productItem_model.dart';
 
 class ProductScreen extends ConsumerStatefulWidget {
-  const ProductScreen({super.key});
+  final List<ProductItem> products;
+
+  const ProductScreen({super.key, required this.products});
 
   @override
   ConsumerState<ProductScreen> createState() => _ProductScreenState();
@@ -59,41 +61,39 @@ class _ProductScreenState extends ConsumerState<ProductScreen>
 
   @override
   Widget build(BuildContext context) {
-    final products = ref.watch(homeProductsProvider);
+    final products = widget.products;
 
     return Scaffold(
       backgroundColor: const Color(0xFFF7F7F5),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
-          child: GridView.builder(
-            itemCount: products.length,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisExtent: 276,
-              crossAxisSpacing: 14,
-              mainAxisSpacing: 18,
-            ),
-            itemBuilder: (context, index) {
-              final product = products[index];
-
-              return FadeTransition(
-                opacity: _fadeAnimation(index),
-                child: SlideTransition(
-                  position: _slideAnimation(index),
-                  child: HomeCard(
-                    imagePath: product.image,
-                    title: product.title,
-                    subtitle: product.subtitle,
-                    price: product.price,
-                    initialFavorite: product.isFavorite,
-                    width: 156,
-                    imageHeight: 170,
-                  ),
-                ),
-              );
-            },
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: GridView.builder(
+          itemCount: products.length,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            mainAxisExtent: 276,
+            crossAxisSpacing: 14,
+            mainAxisSpacing: 18,
           ),
+          itemBuilder: (context, index) {
+            final product = products[index];
+
+            return FadeTransition(
+              opacity: _fadeAnimation(index),
+              child: SlideTransition(
+                position: _slideAnimation(index),
+                child: HomeCard(
+                  imagePath: product.image,
+                  title: product.title,
+                  subtitle: product.subtitle,
+                  price: product.price,
+                  initialFavorite: product.isFavorite,
+                  width: 156,
+                  imageHeight: 170,
+                ),
+              ),
+            );
+          },
         ),
       ),
     );

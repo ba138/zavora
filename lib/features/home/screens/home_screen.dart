@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:zavora/features/home/providers/home_provider.dart';
 import 'package:zavora/features/home/widgets/catogery_card.dart';
 import 'package:zavora/generated/assets.dart';
+import 'package:zavora/model/productItem_model.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen>
+class _HomeScreenState extends ConsumerState<HomeScreen>
     with SingleTickerProviderStateMixin {
   final products = [
     {
@@ -69,8 +73,31 @@ class _HomeScreenState extends State<HomeScreen>
     );
   }
 
+  List<ProductItem> _getProductsForCategory(String categoryText) {
+    final allProducts = ref.read(homeProductsProvider);
+
+    switch (categoryText) {
+      case 'New Collection\n200':
+        return allProducts.take(3).toList();
+      case 'Shirts\n200':
+        return allProducts
+            .where((product) => product.title.toLowerCase().contains('shirt'))
+            .toList();
+      case 'Bags\n200':
+        return allProducts
+            .where((product) => product.title.toLowerCase().contains('dress'))
+            .toList();
+      case 'Electronics\n200':
+      case 'Shoes\n200':
+      default:
+        return allProducts;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final productList = ref.read(homeProductsProvider);
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -95,6 +122,12 @@ class _HomeScreenState extends State<HomeScreen>
                           image: product["image"] as String,
                           text: product["text"] as String,
                           textOnLeft: product["textOnLeft"] as bool,
+                          onTap: () {
+                            final selectedList = _getProductsForCategory(
+                              product["text"] as String,
+                            );
+                            context.push('/product', extra: selectedList);
+                          },
                         ),
                       ),
                     ),
