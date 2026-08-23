@@ -20,6 +20,8 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen>
   late final PageController _pageController;
   late final AnimationController _animationController;
   int _currentIndex = 0;
+  bool _isLikeAnimating = false;
+  bool _isCartAnimating = false;
 
   @override
   void initState() {
@@ -70,6 +72,18 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen>
 
     return Scaffold(
       backgroundColor: const Color(0xFFEFEFEB),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        title: Text(
+          "Product Details",
+          style: const TextStyle(color: Colors.black),
+        ),
+      ),
       body: SafeArea(
         child: FadeTransition(
           opacity: fadeAnimation,
@@ -80,48 +94,6 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen>
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 8),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        GestureDetector(
-                          onTap: () => Navigator.of(context).pop(),
-                          child: Container(
-                            width: 44,
-                            height: 44,
-                            decoration: const BoxDecoration(
-                              color: Colors.black,
-                              shape: BoxShape.circle,
-                            ),
-                            child: const Icon(
-                              Icons.arrow_back_ios_new,
-                              color: Colors.white,
-                              size: 18,
-                            ),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {},
-                          child: Container(
-                            width: 44,
-                            height: 44,
-                            decoration: const BoxDecoration(
-                              color: Colors.white,
-                              shape: BoxShape.circle,
-                            ),
-                            child: const Icon(
-                              Icons.shopping_bag_outlined,
-                              color: Colors.black,
-                              size: 20,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 10),
                   SizedBox(
                     height: 300,
                     width: double.infinity,
@@ -178,25 +150,50 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen>
                         Positioned(
                           bottom: 12,
                           right: 26,
-                          child: GestureDetector(
-                            onTap: () {
-                              ref
-                                  .read(productDetailProvider.notifier)
-                                  .toggleFavorite();
-                            },
-                            child: Container(
-                              width: 42,
-                              height: 42,
-                              decoration: const BoxDecoration(
-                                color: Colors.white,
-                                shape: BoxShape.circle,
-                              ),
-                              child: Icon(
-                                currentProductState.isFavorite
-                                    ? Icons.favorite
-                                    : Icons.favorite_border,
-                                color: Colors.black,
-                                size: 20,
+                          child: AnimatedScale(
+                            scale: currentProductState.isFavorite ? 1.08 : 1,
+                            duration: const Duration(milliseconds: 180),
+                            curve: Curves.easeInOut,
+                            child: GestureDetector(
+                              onTap: () {
+                                setState(() => _isLikeAnimating = true);
+                                ref
+                                    .read(productDetailProvider.notifier)
+                                    .toggleFavorite();
+                                Future.delayed(
+                                  const Duration(milliseconds: 220),
+                                  () =>
+                                      setState(() => _isLikeAnimating = false),
+                                );
+                              },
+                              child: AnimatedSwitcher(
+                                duration: const Duration(milliseconds: 180),
+                                transitionBuilder: (child, animation) {
+                                  return ScaleTransition(
+                                    scale: animation,
+                                    child: child,
+                                  );
+                                },
+                                child: Container(
+                                  key: ValueKey<bool>(
+                                    currentProductState.isFavorite,
+                                  ),
+                                  width: 42,
+                                  height: 42,
+                                  decoration: const BoxDecoration(
+                                    color: Colors.white,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Center(
+                                    child: Icon(
+                                      currentProductState.isFavorite
+                                          ? Icons.favorite
+                                          : Icons.favorite_border,
+                                      size: 20,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
                           ),
@@ -388,51 +385,77 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen>
                           lineHeight: 1.55,
                         ),
                         const SizedBox(height: 20),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 18,
-                            vertical: 16,
-                          ),
-                          decoration: BoxDecoration(
-                            color: const Color(0xFF1A1A1A),
-                            borderRadius: BorderRadius.circular(22),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                        GestureDetector(
+                          onTap: () {
+                            setState(() => _isCartAnimating = true);
+                            Future.delayed(
+                              const Duration(milliseconds: 220),
+                              () => setState(() => _isCartAnimating = false),
+                            );
+                          },
+                          child: AnimatedScale(
+                            scale: _isCartAnimating ? 0.96 : 1.0,
+                            duration: const Duration(milliseconds: 180),
+                            curve: Curves.easeOutBack,
+                            child: AnimatedContainer(
+                              duration: const Duration(milliseconds: 200),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 18,
+                                vertical: 16,
+                              ),
+                              decoration: BoxDecoration(
+                                color: const Color(0xFF1A1A1A),
+                                borderRadius: BorderRadius.circular(22),
+                                boxShadow: _isCartAnimating
+                                    ? [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.18),
+                                          blurRadius: 12,
+                                          offset: const Offset(0, 6),
+                                        ),
+                                      ]
+                                    : [],
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  const MyText(
-                                    text: 'Total Price',
-                                    size: 14,
-                                    color: Color(0xFFC8C8C8),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const MyText(
+                                        text: 'Total Price',
+                                        size: 14,
+                                        color: Color(0xFFC8C8C8),
+                                      ),
+                                      const SizedBox(height: 4),
+                                      MyText(
+                                        text: '\$${widget.product.price}',
+                                        size: 30,
+                                        weight: FontWeight.w700,
+                                        color: Colors.white,
+                                      ),
+                                    ],
                                   ),
-                                  const SizedBox(height: 4),
-                                  MyText(
-                                    text: '\$${widget.product.price}',
-                                    size: 30,
-                                    weight: FontWeight.w700,
-                                    color: Colors.white,
+                                  const Row(
+                                    children: [
+                                      Icon(
+                                        Icons.shopping_bag_outlined,
+                                        color: Colors.white,
+                                      ),
+                                      SizedBox(width: 8),
+                                      MyText(
+                                        text: 'Add to cart',
+                                        size: 22,
+                                        weight: FontWeight.w700,
+                                        color: Colors.white,
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
-                              const Row(
-                                children: [
-                                  Icon(
-                                    Icons.shopping_bag_outlined,
-                                    color: Colors.white,
-                                  ),
-                                  SizedBox(width: 8),
-                                  MyText(
-                                    text: 'Add to cart',
-                                    size: 22,
-                                    weight: FontWeight.w700,
-                                    color: Colors.white,
-                                  ),
-                                ],
-                              ),
-                            ],
+                            ),
                           ),
                         ),
                       ],
