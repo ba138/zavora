@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:zavora/features/auth/screens/login_screen.dart';
 import 'package:zavora/features/auth/screens/onboarding1_screen.dart';
@@ -6,6 +7,7 @@ import 'package:zavora/features/auth/screens/onboarding3_screen.dart';
 import 'package:zavora/features/auth/screens/signin_screen.dart';
 import 'package:zavora/features/auth/screens/splash_screen.dart';
 import 'package:zavora/features/dashboard/screen/custom_nav_bar.dart';
+import 'package:zavora/features/home/screens/product_detail_screen.dart';
 import 'package:zavora/features/home/screens/product_screen.dart';
 import 'package:zavora/model/productItem_model.dart';
 
@@ -69,6 +71,17 @@ final GoRouter appRouter = GoRouter(
         final products = state.extra as List<ProductItem>? ?? const [];
         final title = state.uri.queryParameters['title'] ?? '';
         return ProductScreen(products: products, title: title);
+      },
+    ),
+    GoRoute(
+      path: '/product-detail',
+      name: 'product-detail',
+      builder: (context, state) {
+        final product = state.extra as ProductItem?;
+        if (product == null) {
+          return const Scaffold(body: Center(child: Text('Product not found')));
+        }
+        return ProductDetailScreen(product: product);
       },
     ),
   ],

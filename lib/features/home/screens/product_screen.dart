@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:zavora/features/home/widgets/home_card.dart';
 import 'package:zavora/model/productItem_model.dart';
 
@@ -101,8 +102,12 @@ class _ProductScreenState extends ConsumerState<ProductScreen>
                   subtitle: product.subtitle,
                   price: product.price,
                   initialFavorite: product.isFavorite,
+                  product: product,
                   width: 156,
                   imageHeight: 170,
+                  onTap: () {
+                    context.push('/product-detail', extra: product);
+                  },
                 ),
               ),
             );
