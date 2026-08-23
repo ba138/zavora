@@ -234,3 +234,71 @@ final homeElectronicsProvider =
     NotifierProvider<HomeElectronicsNotifier, List<ProductItem>>(
       HomeElectronicsNotifier.new,
     );
+
+class ProductDetailState {
+  final int quantity;
+  final String selectedSize;
+  final bool isFavorite;
+
+  const ProductDetailState({
+    this.quantity = 1,
+    this.selectedSize = 'L',
+    this.isFavorite = false,
+  });
+
+  ProductDetailState copyWith({
+    int? quantity,
+    String? selectedSize,
+    bool? isFavorite,
+  }) {
+    return ProductDetailState(
+      quantity: quantity ?? this.quantity,
+      selectedSize: selectedSize ?? this.selectedSize,
+      isFavorite: isFavorite ?? this.isFavorite,
+    );
+  }
+}
+
+class ProductDetailNotifier extends Notifier<ProductDetailState> {
+  @override
+  ProductDetailState build() {
+    return const ProductDetailState();
+  }
+
+  void initialize({
+    required bool isFavorite,
+    int quantity = 1,
+    String selectedSize = 'L',
+  }) {
+    state = ProductDetailState(
+      quantity: quantity,
+      selectedSize: selectedSize,
+      isFavorite: isFavorite,
+    );
+  }
+
+  void increment() {
+    state = state.copyWith(quantity: state.quantity + 1);
+  }
+
+  void decrement() {
+    if (state.quantity > 1) {
+      state = state.copyWith(quantity: state.quantity - 1);
+    }
+  }
+
+  void selectSize(String size) {
+    if (size.isNotEmpty) {
+      state = state.copyWith(selectedSize: size);
+    }
+  }
+
+  void toggleFavorite() {
+    state = state.copyWith(isFavorite: !state.isFavorite);
+  }
+}
+
+final productDetailProvider =
+    NotifierProvider<ProductDetailNotifier, ProductDetailState>(
+      ProductDetailNotifier.new,
+    );
