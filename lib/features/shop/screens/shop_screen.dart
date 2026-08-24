@@ -131,19 +131,7 @@ class _ShopScreenState extends ConsumerState<ShopScreen>
                             ),
                           ),
                           onDismissed: (direction) {
-                            final removed = notifier.removeAt(index);
-                            ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text('${removed.title} removed'),
-                                action: SnackBarAction(
-                                  label: 'Undo',
-                                  onPressed: () {
-                                    notifier.insertAt(index, removed);
-                                  },
-                                ),
-                              ),
-                            );
+                            notifier.removeAt(index);
                           },
                           child: ShopCard(product: item),
                         ),
