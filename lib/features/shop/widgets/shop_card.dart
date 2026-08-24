@@ -52,7 +52,7 @@ class ShopCard extends StatelessWidget {
                   MyText(
                     text: product.subtitle,
                     size: 13,
-                    color: AppColors.secondary.withOpacity(0.9),
+                    color: AppColors.background.withValues(alpha: 0.7),
                   ),
                 ],
               ),
