@@ -110,11 +110,43 @@ class _ShopScreenState extends ConsumerState<ShopScreen>
                   separatorBuilder: (_, __) => const SizedBox(height: 16),
                   itemBuilder: (context, index) {
                     final item = products[index];
+                    final notifier = ref.read(homeProductsProvider.notifier);
                     return FadeTransition(
                       opacity: _fadeAnimation(index),
                       child: SlideTransition(
                         position: _slideAnimation(index),
-                        child: ShopCard(product: item),
+                        child: Dismissible(
+                          key: ValueKey(item.title + index.toString()),
+                          direction: DismissDirection.endToStart,
+                          background: Container(
+                            alignment: Alignment.centerRight,
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            decoration: BoxDecoration(
+                              color: Colors.redAccent,
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            child: const Icon(
+                              Icons.delete_forever,
+                              color: Colors.white,
+                            ),
+                          ),
+                          onDismissed: (direction) {
+                            final removed = notifier.removeAt(index);
+                            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('${removed.title} removed'),
+                                action: SnackBarAction(
+                                  label: 'Undo',
+                                  onPressed: () {
+                                    notifier.insertAt(index, removed);
+                                  },
+                                ),
+                              ),
+                            );
+                          },
+                          child: ShopCard(product: item),
+                        ),
                       ),
                     );
                   },

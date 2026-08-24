@@ -64,6 +64,19 @@ class HomeProductsNotifier extends Notifier<List<ProductItem>> {
       ),
     ];
   }
+
+  ProductItem removeAt(int index) {
+    final current = state;
+    final removed = current[index];
+    final newList = List<ProductItem>.from(current)..removeAt(index);
+    state = newList;
+    return removed;
+  }
+
+  void insertAt(int index, ProductItem item) {
+    final newList = List<ProductItem>.from(state)..insert(index, item);
+    state = newList;
+  }
 }
 
 class HomeShoesNotifier extends Notifier<List<ProductItem>> {
