@@ -18,26 +18,14 @@ class ShopScreen extends ConsumerStatefulWidget {
 class _ShopScreenState extends ConsumerState<ShopScreen>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
-  late final Animation<Offset> _offsetAnimation;
-  late final Animation<double> _opacityAnimation;
 
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 1200),
     );
-
-    _offsetAnimation = Tween<Offset>(
-      begin: const Offset(0, 0.06),
-      end: Offset.zero,
-    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
-
-    _opacityAnimation = Tween<double>(
-      begin: 0,
-      end: 1,
-    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
 
     _controller.forward();
   }
@@ -46,6 +34,28 @@ class _ShopScreenState extends ConsumerState<ShopScreen>
   void dispose() {
     _controller.dispose();
     super.dispose();
+  }
+
+  Animation<double> _fadeAnimation(int index) {
+    final start = (index * 0.15).clamp(0.0, 0.7);
+    final end = (start + 0.3).clamp(0.0, 1.0);
+
+    return CurvedAnimation(
+      parent: _controller,
+      curve: Interval(start, end, curve: Curves.easeOut),
+    );
+  }
+
+  Animation<Offset> _slideAnimation(int index) {
+    final start = (index * 0.15).clamp(0.0, 0.7);
+    final end = (start + 0.3).clamp(0.0, 1.0);
+
+    return Tween<Offset>(begin: const Offset(0, 0.3), end: Offset.zero).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Interval(start, end, curve: Curves.easeOutCubic),
+      ),
+    );
   }
 
   @override
@@ -94,20 +104,20 @@ class _ShopScreenState extends ConsumerState<ShopScreen>
               ),
               const SizedBox(height: 18),
               Expanded(
-                child: SlideTransition(
-                  position: _offsetAnimation,
-                  child: FadeTransition(
-                    opacity: _opacityAnimation,
-                    child: ListView.separated(
-                      padding: EdgeInsets.zero,
-                      itemCount: count,
-                      separatorBuilder: (_, __) => const SizedBox(height: 16),
-                      itemBuilder: (context, index) {
-                        final item = products[index];
-                        return ShopCard(product: item);
-                      },
-                    ),
-                  ),
+                child: ListView.separated(
+                  padding: EdgeInsets.zero,
+                  itemCount: count,
+                  separatorBuilder: (_, __) => const SizedBox(height: 16),
+                  itemBuilder: (context, index) {
+                    final item = products[index];
+                    return FadeTransition(
+                      opacity: _fadeAnimation(index),
+                      child: SlideTransition(
+                        position: _slideAnimation(index),
+                        child: ShopCard(product: item),
+                      ),
+                    );
+                  },
                 ),
               ),
             ],
