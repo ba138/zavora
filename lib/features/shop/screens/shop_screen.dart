@@ -1,13 +1,22 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:zavora/contants/app_colors.dart';
 import 'package:zavora/contants/myText.dart';
 import 'package:zavora/contants/my_button.dart';
+import 'package:zavora/features/home/providers/home_provider.dart';
+import 'package:zavora/features/shop/widgets/shop_card.dart';
 
-class ShopScreen extends StatelessWidget {
+class ShopScreen extends ConsumerWidget {
   const ShopScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final products = ref.watch(homeProductsProvider);
+
+    final count = math.min(6, products.length);
+
     return Scaffold(
       backgroundColor: AppColors.onPrimary,
       body: Padding(
@@ -46,6 +55,18 @@ class ShopScreen extends StatelessWidget {
                     ),
                   ),
                 ],
+              ),
+              const SizedBox(height: 18),
+              Expanded(
+                child: ListView.separated(
+                  padding: EdgeInsets.zero,
+                  itemCount: count,
+                  separatorBuilder: (_, __) => const SizedBox(height: 16),
+                  itemBuilder: (context, index) {
+                    final item = products[index];
+                    return ShopCard(product: item);
+                  },
+                ),
               ),
             ],
           ),
