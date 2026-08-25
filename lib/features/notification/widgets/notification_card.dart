@@ -31,13 +31,14 @@ class NotificationCard extends StatelessWidget {
           color: isUnread ? const Color(0xFFF2F6FF) : Colors.white,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
-            color: isUnread ? const Color(0xFFD8E4FF) : AppColors.background,
+            color: isUnread ? const Color(0xFFB7CCF5) : const Color(0xFFD6D9E0),
+            width: 1.2,
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.08),
-              blurRadius: 8,
-              offset: const Offset(0, 4),
+              color: Colors.black.withValues(alpha: 0.14),
+              blurRadius: 12,
+              offset: const Offset(0, 5),
             ),
           ],
         ),
