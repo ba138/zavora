@@ -75,7 +75,7 @@ class SwitchToggle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Transform.scale(
-      scale: 1.05,
+      scale: 1,
       child: Switch(
         value: isEnabled,
         onChanged: (_) {},
