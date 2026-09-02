@@ -71,9 +71,10 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen>
             .animate(_animationController);
 
     return Scaffold(
-      backgroundColor: const Color(0xFFEFEFEB),
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
+        surfaceTintColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
