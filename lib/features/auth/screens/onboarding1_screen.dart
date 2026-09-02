@@ -26,6 +26,7 @@ class _OnBoarding1ScreenState extends State<OnBoarding1Screen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Image
+              SizedBox(height: size.height * 0.04),
               Container(
                 width: double.infinity,
                 height: size.height * 0.48,

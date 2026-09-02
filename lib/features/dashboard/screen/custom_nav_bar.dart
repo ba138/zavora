@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zavora/contants/app_colors.dart';
 import 'package:zavora/features/home/screens/home_screen.dart';
-import 'package:zavora/features/home/screens/product_screen.dart';
 import 'package:zavora/features/notification/screens/notification_screen.dart';
 import 'package:zavora/features/profile/screens/profile_screen.dart';
 import 'package:zavora/features/shop/screens/shop_screen.dart';

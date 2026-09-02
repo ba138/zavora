@@ -25,6 +25,8 @@ class _OnBoarding3ScreenState extends State<OnBoarding3Screen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SizedBox(height: size.height * 0.04),
+
               // Image
               Container(
                 width: double.infinity,

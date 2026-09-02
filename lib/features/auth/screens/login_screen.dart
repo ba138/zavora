@@ -19,128 +19,136 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 20),
-              Center(
-                child: MyText(
-                  text: "Zavora",
-                  size: 60,
-                  weight: FontWeight.w600,
-                  color: AppColors.onSecondary,
-                ),
-              ),
-              const SizedBox(height: 30),
-              MyText(
-                text: "Welcome Back!",
-                color: AppColors.background,
-                size: 24,
-                weight: FontWeight.bold,
-              ),
-              MyText(
-                text: 'Please Login or Sign Up To Continue Our App.',
-                color: const Color(0xFF777777),
-                size: 16,
-                weight: FontWeight.w400,
-                lineHeight: 1.45,
-              ),
-              const SizedBox(height: 60),
-
-              MyTextField(
-                label: "Email",
-                hint: "Enter your email",
-                prefix: const Icon(
-                  Icons.email_outlined,
-                  color: AppColors.primary,
-                ),
-              ),
-              MyTextField(
-                label: "Password",
-
-                hint: "Enter your password",
-                prefix: const Icon(
-                  Icons.lock_outlined,
-                  color: AppColors.primary,
-                ),
-                isObSecure: true,
-              ),
-              const SizedBox(height: 40),
-              MyButton(
-                onTap: () {
-                  context.goNamed('navbar');
-                },
-                buttonText: "Login",
-                radius: 12,
-              ),
-              const SizedBox(height: 20),
-
-              Row(
-                children: [
-                  Expanded(
-                    child: Divider(color: AppColors.onSecondary, thickness: 1),
-                  ),
-                  const SizedBox(width: 12),
-                  MyText(
-                    text: "OR",
-                    size: 14,
-                    weight: FontWeight.bold,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 20),
+                Center(
+                  child: MyText(
+                    text: "Zavora",
+                    size: 60,
+                    weight: FontWeight.w600,
                     color: AppColors.onSecondary,
                   ),
-                  const SizedBox(width: 12),
+                ),
+                const SizedBox(height: 30),
+                MyText(
+                  text: "Welcome Back!",
+                  color: AppColors.background,
+                  size: 24,
+                  weight: FontWeight.bold,
+                ),
+                MyText(
+                  text: 'Please Login or Sign Up To Continue Our App.',
+                  color: const Color(0xFF777777),
+                  size: 16,
+                  weight: FontWeight.w400,
+                  lineHeight: 1.45,
+                ),
+                const SizedBox(height: 60),
 
-                  Expanded(
-                    child: Divider(color: AppColors.onSecondary, thickness: 1),
+                MyTextField(
+                  label: "Email",
+                  hint: "Enter your email",
+                  prefix: const Icon(
+                    Icons.email_outlined,
+                    color: AppColors.primary,
                   ),
-                ],
-              ),
-              const SizedBox(height: 20),
-              PlatformButton(
-                text: "Google",
-                imagePath: Assets.google,
-                onTap: () {},
-                backgroundColor: AppColors.onSecondary,
-                borderColor: AppColors.onSecondary,
-                textColor: AppColors.primary,
-              ),
-              const SizedBox(height: 10),
+                ),
+                MyTextField(
+                  label: "Password",
 
-              PlatformButton(
-                text: "Apple",
-                imagePath: Assets.apple,
-                onTap: () {},
-                backgroundColor: AppColors.onSecondary,
-                borderColor: AppColors.onSecondary,
-                textColor: AppColors.primary,
-              ),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  MyText(
-                    text: "Don't have an account?",
-                    size: 16,
-                    weight: FontWeight.w400,
-
-                    color: const Color(0xFF777777),
+                  hint: "Enter your password",
+                  prefix: const Icon(
+                    Icons.lock_outlined,
+                    color: AppColors.primary,
                   ),
-                  const SizedBox(width: 5),
-                  GestureDetector(
-                    onTap: () {
-                      context.goNamed('signin');
-                    },
-                    child: MyText(
-                      text: "Sign Up",
-                      size: 16,
+                  isObSecure: true,
+                ),
+                const SizedBox(height: 40),
+                MyButton(
+                  onTap: () {
+                    context.goNamed('navbar');
+                  },
+                  buttonText: "Login",
+                  radius: 12,
+                ),
+                const SizedBox(height: 20),
+
+                Row(
+                  children: [
+                    Expanded(
+                      child: Divider(
+                        color: AppColors.onSecondary,
+                        thickness: 1,
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    MyText(
+                      text: "OR",
+                      size: 14,
                       weight: FontWeight.bold,
                       color: AppColors.onSecondary,
                     ),
-                  ),
-                ],
-              ),
-            ],
+                    const SizedBox(width: 12),
+
+                    Expanded(
+                      child: Divider(
+                        color: AppColors.onSecondary,
+                        thickness: 1,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                PlatformButton(
+                  text: "Google",
+                  imagePath: Assets.google,
+                  onTap: () {},
+                  backgroundColor: AppColors.onSecondary,
+                  borderColor: AppColors.onSecondary,
+                  textColor: AppColors.primary,
+                ),
+                const SizedBox(height: 10),
+
+                PlatformButton(
+                  text: "Apple",
+                  imagePath: Assets.apple,
+                  onTap: () {},
+                  backgroundColor: AppColors.onSecondary,
+                  borderColor: AppColors.onSecondary,
+                  textColor: AppColors.primary,
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    MyText(
+                      text: "Don't have an account?",
+                      size: 16,
+                      weight: FontWeight.w400,
+
+                      color: const Color(0xFF777777),
+                    ),
+                    const SizedBox(width: 5),
+                    GestureDetector(
+                      onTap: () {
+                        context.goNamed('signin');
+                      },
+                      child: MyText(
+                        text: "Sign Up",
+                        size: 16,
+                        weight: FontWeight.bold,
+                        color: AppColors.onSecondary,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

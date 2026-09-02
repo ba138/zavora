@@ -21,7 +21,7 @@ class GenderSelectorRow extends StatelessWidget {
         Expanded(
           child: Row(
             children: [
-              const SizedBox(width: 8),
+              // const SizedBox(width: 8),
               Expanded(
                 child: Container(
                   height: 40,
@@ -48,7 +48,7 @@ class GenderSelectorRow extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(width: 12),
+              const SizedBox(width: 6),
               Expanded(
                 child: Container(
                   height: 40,
